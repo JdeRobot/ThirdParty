@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(ardronelib-thirdparty)
+project(ardronelib)
 
 
 ## Build ARDrone SDK here
@@ -25,7 +25,7 @@ set(ARDRONE_SDK_LIB_PATH ${CMAKE_BINARY_DIR}/lib/ardrone)
 
 include(ExternalProject)
 ExternalProject_Add(ardronelib
-        GIT_REPOSITORY git://github.com/RoboticsURJC/ardronelib.git
+        GIT_REPOSITORY git://github.com/AutonomyLab/ardronelib.git
         GIT_TAG ${GIT_TAG}
         PREFIX ${CMAKE_BINARY_DIR}
         CONFIGURE_COMMAND echo "No configure"
@@ -35,8 +35,16 @@ ExternalProject_Add(ardronelib
 )
 
 ## Install it
-install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/ardrone/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/jderobot/ardrone)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/src/ardronelib/ARDroneLib/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/jderobot/ardrone)
+install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/ardrone/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/jderobot/ardrone
+)
+install(DIRECTORY ${CMAKE_BINARY_DIR}/src/ardronelib/ARDroneLib/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/jderobot/ardrone
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "Build" EXCLUDE
+		REGEX "FFMPEG/ffmpeg" EXCLUDE
+)
 
 
 ## Uninstall
@@ -49,10 +57,10 @@ add_custom_target(uninstall
 ## ---------------------------
 
 # CPACK patch #1: undesired executables
-add_custom_command(TARGET ardronelib PRE_BUILD
-	COMMAND ${CMAKE_COMMAND} -E remove_directory "${ARDRONE_SDK}/VP_SDK/Build/PROD_MODE_gcc_4.3.3_Examples"
-	COMMENT "ardronelib: Delete undesired executables"
-)
+#add_custom_command(TARGET ardronelib PRE_BUILD
+#	COMMAND ${CMAKE_COMMAND} -E remove_directory "${ARDRONE_SDK}/VP_SDK/Build/PROD_MODE_gcc_4.3.3_Examples"
+#	COMMENT "ardronelib: Delete undesired executables"
+#)
 
 
 # CPACK patch #2: requires at least one executable
