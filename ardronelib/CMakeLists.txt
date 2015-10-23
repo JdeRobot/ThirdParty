@@ -34,17 +34,34 @@ ExternalProject_Add(ardronelib
         BUILD_IN_SOURCE 1
 )
 
+
 ## Install it
 install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/ardrone/
 	DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/jderobot/ardrone
 )
-install(DIRECTORY ${CMAKE_BINARY_DIR}/src/ardronelib/ARDroneLib/
+ExternalProject_Get_Property(ardronelib SOURCE_DIR)
+install(DIRECTORY ${SOURCE_DIR}/ARDroneLib/
 	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/jderobot/ardrone
 	FILES_MATCHING
 		PATTERN "*.h"
+		PATTERN README
+		PATTERN LICENSE
 		PATTERN "Build" EXCLUDE
 		REGEX "FFMPEG/ffmpeg" EXCLUDE
 )
+install(FILES
+	"${SOURCE_DIR}/LICENSE"
+	"${SOURCE_DIR}/README.md"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/include/jderobot/ardrone"
+)
+install(FILES
+	"${ARDRONE_SDK}/FFMPEG/ffmpeg/VERSION"
+	"${ARDRONE_SDK}/FFMPEG/ffmpeg/LICENSE"
+	"${ARDRONE_SDK}/FFMPEG/ffmpeg/README"
+#	"${ARDRONE_SDK}/FFMPEG/ffmpeg/COPYING*"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/include/jderobot/ardrone/FFMPEG"
+)
+
 
 
 ## Uninstall
@@ -64,9 +81,9 @@ add_custom_target(uninstall
 
 
 # CPACK patch #2: requires at least one executable
-#file(WRITE dummy_main.c "int main(int argc, char** argv){return 0;}")
-#add_executable(dummy_main dummy_main.c)
-#INSTALL(FILES ${CMAKE_BINARY_DIR}/dummy_main DESTINATION /tmp OPTIONAL)
+file(WRITE dummy_main.c "int main(int argc, char** argv){return 0;}")
+add_executable(dummy_main dummy_main.c)
+INSTALL(FILES ${CMAKE_BINARY_DIR}/dummy_main DESTINATION /tmp OPTIONAL)
 
 
 #
@@ -88,7 +105,7 @@ endmacro(dpkg_arch)
 include (InstallRequiredSystemLibraries)
 SET (CPACK_GENERATOR "DEB")
 SET (CPACK_SOURCE_GENERATOR TGZ)
-SET (CPACK_DEBIAN_PACKAGE_SHLIBDEPS OFF)
+SET (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 SET (CPACK_SET_DESTDIR "on")
 SET (CPACK_PACKAGING_INSTALL_PREFIX "/usr/local")
 
