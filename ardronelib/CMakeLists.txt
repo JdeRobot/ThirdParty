@@ -71,6 +71,36 @@ add_custom_target(uninstall
 )
 
 
+## pkg-config
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(libdir ${prefix}/lib/jderobot/ardrone)
+
+set(includedir ${prefix}/include/jderobot/ardrone/FFMPEG/Includes)
+configure_file(ffmpeg-0.8.pc.in ffmpeg-0.8.pc)
+
+set(VERSION ${ARDRONE_SDK_FLAVOR})
+set(includedir
+	${prefix}/include/jderobot/ardrone/
+	${prefix}/include/jderobot/ardrone/Soft/Common
+	${prefix}/include/jderobot/ardrone/Soft/Lib
+	${prefix}/include/jderobot/ardrone/VP_SDK
+	${prefix}/include/jderobot/ardrone/VP_SDK/VP_Os/linux
+	${prefix}/include/jderobot/ardrone/VP_SDK/VP_Api
+)
+configure_file(ardronelib.pc.in ardronelib.pc)
+
+install(FILES
+	"${CMAKE_BINARY_DIR}/ardronelib.pc"
+	"${CMAKE_BINARY_DIR}/ffmpeg-0.8.pc"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
+)
+
+add_custom_command(TARGET uninstall
+	WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
+	COMMAND ${CMAKE_COMMAND} -E remove ardronelib.pc ffmpeg-0.8.pc
+)
+
+
 ## ---------------------------
 
 # CPACK patch #1: undesired executables
