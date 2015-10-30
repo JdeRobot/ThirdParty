@@ -160,8 +160,14 @@ SET(CPACK_DEBIAN_PACKAGE_DEPENDS "daemontools, libsdl1.2-dev, libgtk2.0-dev, lib
 #    "${CMAKE_CURRENT_SOURCE_DIR}/scripts/cmake/postinst"
 #    "${CMAKE_CURRENT_SOURCE_DIR}/scripts/cmake/postrm")
 
-SET (CPACK_PACKAGE_DESCRIPTION_SUMMARY "ArDrone SDK for JdeRobot")
-SET (CPACK_PACKAGE_DESCRIPTION "ARDrone SDK for Jderobot description")
+SET (CPACK_PACKAGE_DESCRIPTION_SUMMARY
+"Community version of ArDrone SDK 2.0.1 by Parrot
+ You can obtain a copy of source code from: https://github.com/AutonomyLab/ardronelib/
+ .
+ Embedded dependencies:
+   * FFMPEG 0.8 - http://ffmpeg.org/
+   * iniparser 3.0b - http://ndevilla.free.fr/iniparser/
+")
 
 SET (CPACK_PACKAGE_CONTACT "Roberto Calvo <rocapal@gsyc.urjc.es>")
 SET (CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}_${VERSION}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}")
