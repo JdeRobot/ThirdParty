@@ -1,4 +1,4 @@
-Package: jderobot-deps
+Package: jderobot-deps-dev
 Version: 5.3.0-rc1
 Architecture: all
 Section: net
