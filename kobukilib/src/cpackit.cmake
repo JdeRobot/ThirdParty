@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(kobuki)
+project(kobukilib)
 
 SET (CPACK_GENERATOR "DEB")
 SET (CPACK_PACKAGING_INSTALL_PREFIX "/usr/local")
@@ -18,8 +18,8 @@ SET (CPACK_DEBIAN_PACKAGE_SECTION "devel")
 SET(CPACK_DEBIAN_PACKAGE_DEPENDS "python-wstool, python-catkin-pkg, python-empy, python-nose, python-setuptools, build-essential, libeigen3-dev")
 
 SET (CPACK_PACKAGE_DESCRIPTION
-"descripcion")
+"kobukilib is a set of libraries needed to compile jderobot kobuki_driver.")
 
-SET (CPACK_PACKAGE_CONTACT "Topo <topo@gsyc.urjc.es>")
+SET (CPACK_PACKAGE_CONTACT "Francisco Perez <f.perez475@gmail.com>")
 
 include (CPack Documentation)
