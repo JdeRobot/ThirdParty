@@ -1,0 +1,20 @@
+<package>
+  <name>ecl_manipulation</name>
+  <version>0.50.2</version>
+  <description>
+    Includes basic manipulation related structures as well as a few 
+    algorithms currently used at Yujin Robot.
+  </description>
+  <author email="d.stonier@gmail.com">Daniel Stonier</author>
+  <maintainer email="d.stonier@gmail.com">Daniel Stonier</maintainer>
+  <license>BSD</license>
+  <url type="website">http://www.ros.org/wiki/ecl_manipulation</url>
+  <url type="repository">https://github.com/stonier/ecl_manipulation</url>
+  <url type="bugtracker">https://github.com/stonier/ecl_manipulation/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>ecl_manipulators</run_depend>
+  <export>
+    <metapackage/>
+  </export>
+</package>

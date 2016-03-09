@@ -1,0 +1,158 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+import argparse
+import multiprocessing
+import subprocess
+import sys
+import os
+
+# find the import relatively if available to work before installing catkin or overlaying installed version
+if os.path.exists(os.path.join(os.path.dirname(__file__), 'CMakeLists.txt')):
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python'))
+from catkin.init_workspace import init_workspace
+from catkin.terminal_color import disable_ANSI_colors
+from catkin.builder import cmake_input_changed, print_command_banner, run_command, run_command_colorized
+
+
+def main():
+    args, cmake_args, make_args = _parse_args()
+
+    # disable colors if asked
+    if args.no_color:
+        disable_ANSI_colors()
+
+    # verify that the base path is known
+    base_path = os.path.abspath('.')
+    if args.directory:
+        base_path = os.path.abspath(args.directory)
+    if not os.path.exists(base_path):
+        return 'The specified base path "%s" does not exist' % base_path
+
+    # verify that the base path does not contain a CMakeLists.txt
+    if os.path.exists(os.path.join(base_path, 'CMakeLists.txt')):
+        return 'The specified base path "%s" contains a CMakeLists.txt but "catkin_make" must be invoked in the root of workspace.' % base_path
+
+    # verify that the base path does not contain a package.xml
+    if os.path.exists(os.path.join(base_path, 'package.xml')):
+        return 'The specified base path "%s" contains a package but "catkin_make" must be invoked in the root of workspace.' % base_path
+
+    print('Base path: %s' % base_path)
+
+    # determine source space
+    source_path = os.path.join(base_path, 'src')
+    if args.source:
+        source_path = os.path.abspath(args.source)
+    if not os.path.exists(source_path):
+        return 'The specified source space "%s" does not exist' % source_path
+    print('Source space: %s' % source_path)
+
+    build_path = os.path.join(base_path, 'build')
+    if args.build:
+        build_path = os.path.abspath(args.build)
+    print('Build space: %s' % build_path)
+
+    # determine devel space
+    devel_path = os.path.join(base_path, 'devel')
+    prefix = '-DCATKIN_DEVEL_PREFIX='
+    devel_prefix = [a for a in cmake_args if a.startswith(prefix)]
+    if devel_prefix:
+        devel_path = os.path.abspath(devel_prefix[-1][len(prefix):])
+        cmake_args = [a for a in cmake_args if a not in devel_prefix]
+    print('Devel space: %s' % devel_path)
+
+    # determine install space
+    install_path = os.path.join(base_path, 'install')
+    prefix = '-DCMAKE_INSTALL_PREFIX='
+    install_prefix = [a for a in cmake_args if a.startswith(prefix)]
+    if install_prefix:
+        install_path = os.path.abspath(install_prefix[-1][len(prefix):])
+        cmake_args = [a for a in cmake_args if a not in install_prefix]
+    print('Install space: %s' % install_path)
+
+    # ensure build folder exists
+    if not os.path.exists(build_path):
+        os.mkdir(build_path)
+
+    # ensure toplevel cmake file exists
+    toplevel_cmake = os.path.join(source_path, 'CMakeLists.txt')
+    if not os.path.exists(toplevel_cmake):
+        try:
+            init_workspace(source_path)
+        except Exception as e:
+            return 'Creating the toplevel cmake file failed: %s' % str(e)
+
+    # check if cmake must be run (either for a changed list of package paths or changed cmake arguments)
+    force_cmake = cmake_input_changed(source_path, build_path, cmake_args)
+
+    # consider calling cmake
+    makefile = os.path.join(build_path, 'Makefile')
+    if not os.path.exists(makefile) or args.force_cmake or force_cmake:
+        cmd = ['cmake', source_path, '-DCATKIN_DEVEL_PREFIX=%s' % devel_path, '-DCMAKE_INSTALL_PREFIX=%s' % install_path]
+        cmd += cmake_args
+        try:
+            print_command_banner(cmd, build_path, color=not args.no_color)
+            if args.no_color:
+                run_command(cmd, build_path)
+            else:
+                run_command_colorized(cmd, build_path)
+        except subprocess.CalledProcessError:
+            return 'Invoking "cmake" failed'
+    else:
+        cmd = ['make', 'cmake_check_build_system']
+        try:
+            print_command_banner(cmd, build_path, color=not args.no_color)
+            if args.no_color:
+                run_command(cmd, build_path)
+            else:
+                run_command_colorized(cmd, build_path)
+        except subprocess.CalledProcessError:
+            return 'Invoking "make cmake_check_build_system" failed'
+
+    # invoke make
+    cmd = ['make']
+    jobs = args.jobs
+    if args.jobs == '':
+        cmd.append('-j')
+    else:
+        jobs = args.jobs
+        if not jobs:
+            if 'ROS_PARALLEL_JOBS' in os.environ:
+                jobs = int(os.environ['ROS_PARALLEL_JOBS'])
+            else:
+                jobs = multiprocessing.cpu_count()
+        cmd.append('-j%d' % jobs)
+        cmd.append('-l%d' % jobs)
+    cmd += make_args
+    try:
+        print_command_banner(cmd, build_path, color=not args.no_color)
+        run_command(cmd, build_path)
+    except subprocess.CalledProcessError:
+        return 'Invoking "make" failed'
+
+
+def _parse_args(args=sys.argv[1:]):
+    # extract -D* and -G* arguments
+    cmake_args = [a for a in args if a.startswith('-D') or a.startswith('-G')]
+    args = [a for a in args if a not in cmake_args]
+
+    parser = argparse.ArgumentParser(description='Creates the catkin workspace layout and invokes cmake and make. Any argument starting with "-D" will be passed to the "cmake" invocation. All other arguments are passed to the "make" invocation.')
+    parser.add_argument('-C', '--directory', default='.', help='The base path of the workspace (default ".")')
+    parser.add_argument('--source', help='The path to the source space (default "src")')
+    parser.add_argument('--build', help='The path to the build space (default "build")')
+    parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
+    parser.add_argument('--force-cmake', action='store_true', help='Invoke "cmake" even if it has been executed before')
+    parser.add_argument('--no-color', action='store_true', help='Disables colored ouput (only for catkin_make and CMake)')
+
+    namespace, unknown_args = parser.parse_known_args(args)
+    # support -j/--jobs without an argument which argparse can not distinguish
+    if not namespace.jobs and [a for a in args if a == '-j' or a == '--jobs']:
+        namespace.jobs = ''
+    return namespace, cmake_args, unknown_args
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main())
+    except Exception as e:
+        sys.exit(str(e))

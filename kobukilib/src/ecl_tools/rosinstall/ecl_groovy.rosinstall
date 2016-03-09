@@ -1,0 +1,36 @@
+# official ROS stacks
+- other:
+    local-name: /opt/ros/groovy/share/ros
+- other:
+    local-name: /opt/ros/groovy/share
+- other:
+    local-name: /opt/ros/groovy/stacks
+- setup-file:
+    local-name: /opt/ros/groovy/setup.sh
+
+# ECL stacks
+- git:
+    uri: https://github.com/stonier/ecl_tools.git
+    local-name: ecl_tools
+    version: master
+- git:
+    uri: https://github.com/stonier/ecl_lite.git
+    local-name: ecl_lite
+    version: master
+
+- git:
+    uri: https://github.com/stonier/ecl_core.git
+    local-name: ecl_core
+    version: master
+
+- git:
+    uri: https://github.com/stonier/ecl_navigation.git
+    local-name: ecl_navigation
+    version: master
+
+- git:
+    uri: https://github.com/stonier/ecl_manipulation.git
+    local-name: ecl_manipulation
+    version: master
+
+

@@ -1,0 +1,116 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+import argparse
+import os
+import sys
+
+# find the import relatively if available to work before installing catkin or overlaying installed version
+if os.path.exists(os.path.join(os.path.dirname(__file__), 'CMakeLists.txt')):
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python'))
+from catkin.builder import build_workspace_isolated, colorize_line
+
+
+def extract_cmake_args(args=sys.argv[1:]):
+    # extract -D* and -G* arguments
+    cmake_args = [a for a in args if a.startswith('-D') or a.startswith('-G')]
+    args = [a for a in args if a not in cmake_args]
+
+    return cmake_args, args
+
+
+def parse_args(args=sys.argv[1:]):
+    parser = argparse.ArgumentParser(
+        description='Builds each catkin (and non-catkin) package from '
+                    'a given workspace in isolation, but still in '
+                    'topological order.'
+    )
+    add = parser.add_argument
+    add('-C', '--directory', dest='workspace',
+        help='The base path of the workspace (default ".")'
+    )
+    add('--source', '--source-space', default=None,
+        help='The path to the source space (default "src")'
+    )
+    add('--build', '--build-space', default=None,
+        help='The path to the build space (default "build_isolated")'
+    )
+    add('--devel', '--devel-space', default=None,
+        help='Sets the target devel space (default "devel_isolated")'
+    )
+    add('--merge', action='store_true', default=False,
+        help='Build each catkin package into a common devel space.'
+    )
+    add('--install-space', dest='install_space', default=None,
+        help='Sets the target install space (default "install_isolated")'
+    )
+    add('--install', action='store_true', default=False,
+        help='Causes each catkin package to be installed.'
+    )
+    add('-j', '--jobs', type=int, metavar='JOBS', nargs='?',
+        help='Specifies the number of jobs (commands) to run simultaneously. '
+             'Defaults to the number of CPU cores.'
+    )
+    add('--force-cmake', action='store_true', default=False,
+        help='Runs cmake explicitly for each catkin package.'
+    )
+    add('--no-color', action='store_true', default=False,
+        help='Disables colored output (only for catkin_make and CMake)'
+    )
+    add('-v', '--verbose', action='store_true', default=False,
+        help='Prints more build output.'
+    )
+    return parser.parse_args(args)
+
+
+def handle_cmake_args(cmake_args, opts):
+    # Process cmake arugments
+    for arg in list(cmake_args):
+        if arg.startswith('-G'):
+            continue
+        if arg.startswith('-DCMAKE_INSTALL_PREFIX='):
+            if opts.install_space is None:
+                opts.install_space = arg.split('=', 1)[-1]
+            else:
+                print(colorize_line(
+                    "Warning: both the cmake argument '" + str(arg) + "' " +
+                    "and the --install-space argument have been used, " +
+                    "using the --install-space argument."
+                ))
+            cmake_args.remove(arg)
+        if arg.startswith('-DCATKIN_DEVEL_PREFIX='):
+            if opts.devel is None:
+                opts.devel = arg.split('=', 1)[-1]
+            else:
+                print(colorize_line(
+                    "Warning: both the cmake argument '" + str(arg) + "' " +
+                    "and the --devel-space argument have been used, " +
+                    "using the --devel-space argument."
+                ))
+            cmake_args.remove(arg)
+    return cmake_args, opts
+
+
+def main():
+    cmake_args, args = extract_cmake_args()
+    opts = parse_args(args)
+
+    cmake_args, opts = handle_cmake_args(cmake_args, opts)
+
+    build_workspace_isolated(
+        workspace=opts.workspace or '.',
+        sourcespace=opts.source,
+        buildspace=opts.build,
+        develspace=opts.devel,
+        installspace=opts.install_space,
+        merge=opts.merge,
+        install=opts.install,
+        jobs=opts.jobs,
+        force_cmake=opts.force_cmake,
+        colorize=not opts.no_color,
+        quiet=not opts.verbose,
+        cmake_args=cmake_args
+    )
+
+if __name__ == '__main__':
+    main()

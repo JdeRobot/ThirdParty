@@ -1,0 +1,29 @@
+#!/bin/bash
+
+export ECL_JENKINS=1
+sudo apt-get update
+sudo apt-get -y install python-wstool python-rospkg python-rosinstall python-vcstools python-rosdep python-catkin-pkg
+sudo apt-get -y install ros-groovy-ros ros-groovy-catkin libeigen3-dev
+rm -rf ${WORKSPACE}/ecl
+mkdir -p ${WORKSPACE}/ecl/src
+mkdir -p ${WORKSPACE}/ecl/debug/build
+mkdir -p ${WORKSPACE}/ecl/debug/devel
+mkdir -p ${WORKSPACE}/ecl/debug/install
+mkdir -p ${WORKSPACE}/ecl/release/build
+mkdir -p ${WORKSPACE}/ecl/release/devel
+mkdir -p ${WORKSPACE}/ecl/release/install
+wstool init -j3 ${WORKSPACE}/ecl/src https://raw.github.com/stonier/ecl_tools/master/rosinstall/ecl_groovy.rosinstall
+echo "========== Setting up Ros Environment =========="
+source /opt/ros/groovy/setup.bash
+catkin_init_workspace ${WORKSPACE}/ecl/src
+echo "========== Compiling =========="
+catkin_make --no-color --directory=${WORKSPACE}/ecl/debug --source=${WORKSPACE}/ecl/src --build=${WORKSPACE}/ecl/debug/build -DCMAKE_INSTALL_PREFIX="${WORKSPACE}/ecl/debug/install" -DCMAKE_VERBOSE_MAKEFILE=true
+cd ${WORKSPACE}/ecl/debug/build
+make tests
+make run_tests
+make install
+catkin_make --no-color --directory=${WORKSPACE}/ecl/release --source=${WORKSPACE}/ecl/src --build=${WORKSPACE}/ecl/release/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="${WORKSPACE}/ecl/release/install" -DCMAKE_VERBOSE_MAKEFILE=true
+cd ${WORKSPACE}/ecl/release/build
+make tests
+make run_tests
+make install
