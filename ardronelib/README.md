@@ -7,13 +7,17 @@ It will install *ARDroneSDK 2.0.1* dependency for *ardrone_server*
 
 Install
 -------
-* Create a build directory
+* Create a build directory and move into it:
 
-  `mkdir ardronelib-build`
+  `mkdir ardronelib-build && cd ardronelib-build`
   
-* Just get **CMakeLists.txt** with 
+* Get **CMakeLists.txt** and related files with:
 
-  `wget https://raw.githubusercontent.com/RoboticsURJC/JdeRobot-ThirdParty/master/ardronelib/CMakeLists.txt`
+  ```
+  wget https://raw.githubusercontent.com/RoboticsURJC/JdeRobot-ThirdParty/master/ardronelib/CMakeLists.txt
+  wget https://raw.githubusercontent.com/RoboticsURJC/JdeRobot-ThirdParty/master/ardronelib/ffmpeg-0.8.pc.in
+  wget https://raw.githubusercontent.com/RoboticsURJC/JdeRobot-ThirdParty/master/ardronelib/ardronelib.pc.in
+  ```
   
 * Build it:
 
