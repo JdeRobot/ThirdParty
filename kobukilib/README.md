@@ -11,22 +11,31 @@ In order to compile this libraries from source, you should:
     ```sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'```
     
     ```sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116```
-    
-  2. Install dependencies:
+  
+  2. Update the package index:
+
+    ```sudo apt-get update```
+
+  3. Install dependencies:
   
     ```sudo apt-get install python-wstool python-catkin-pkg python-empy python-nose python-setuptools build-essential libeigen3-dev```
     
-  3. Download this repository
+  4. Download this repository
   
     ```git clone https://github.com/RoboticsURJC/JdeRobot-ThirdParty.git ```
     
     ```cd kobukilib/build```
     
-  4. Compile and install
+  5. Compile and install
   
-    ```cmake . && make && sudo make install```
+    ```cmake .. && make && sudo make install```
 
 
 ## Usage
 
-This code is needed to compile kobuki_driver component from JdeRobot official repository. Once installed you should be able to compile kobuki_driver.
+This code is needed to compile kobuki_driver component from JdeRobot official repository. Once installed you should be able to compile kobuki_driver.i
+
+## Additional Notes
+
+* Remove it with: `make uninstall`
+* You can also create a debian package with: `make package`
