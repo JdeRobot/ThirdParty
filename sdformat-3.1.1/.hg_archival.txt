@@ -1,0 +1,5 @@
+repo: 17049bd77df5bd6cd56a76edba4a54afb5647740
+node: 3739cf5051a6ddf7e8e13696c1ba1aeed8e2b80b
+branch: sdf3
+latesttag: sdformat3_3.1.0
+latesttagdistance: 7
