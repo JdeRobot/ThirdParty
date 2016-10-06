@@ -1,0 +1,9 @@
+AUTHORS
+
+Marek M. Cel
+marekcel@marekcel.pl
+Core library, SVG graphics, example program.
+
+Aitor Martinez
+aitor.martinez.fernandez@gmail.com
+Python 3.5 support.
