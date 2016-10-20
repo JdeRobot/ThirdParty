@@ -1,6 +1,6 @@
 <package>
   <name>kobuki_dock_drive</name>
-  <version>0.5.3</version>
+  <version>0.7.1</version>
   <description>
 	    Dock driving library for Kobuki. Users owning a docking station for Kobuki 
 	    can use this tool to develop autonomous docking drive algorithms.
@@ -13,6 +13,7 @@
   <url type="website">http://ros.org/wiki/kobuki_dock_drive</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ecl_build</build_depend>
   <build_depend>ecl_threads</build_depend>
   <build_depend>ecl_geometry</build_depend>
   <build_depend>ecl_linear_algebra</build_depend>

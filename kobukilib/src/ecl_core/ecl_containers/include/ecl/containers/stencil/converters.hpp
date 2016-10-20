@@ -73,6 +73,37 @@ class ECL_PUBLIC Converter <Integral, Stencil< Array<unsigned char,Size> > > : p
 template <typename Integral, std::size_t Size>
 class ECL_PUBLIC Converter <Integral, Stencil< Array<signed char,Size> > > : public converters::FromByteArray< Integral, Stencil< Array<signed char,Size> > > {};
 
+/**
+ * @brief Specialisation for unsigned int to vector based unsigned char Stencil container.
+ */
+template <>
+class ECL_PUBLIC Converter< Stencil< std::vector<unsigned char> >, unsigned int > : public converters::IntegralToByteArray< Stencil< std::vector<unsigned char> >, unsigned int > {};
+
+/**
+ * @brief Specialisation for int to vector based unsigned char Stencil container.
+ */
+template <>
+class ECL_PUBLIC Converter< Stencil< std::vector<unsigned char> >, int > : public converters::IntegralToByteArray< Stencil< std::vector<unsigned char> >, int > {};
+
+/**
+ * @brief Specialisation for long to vector based unsigned char Stencil container.
+ */
+template <>
+class ECL_PUBLIC Converter< Stencil< std::vector<unsigned char> >, long > : public converters::IntegralToByteArray< Stencil< std::vector<unsigned char> >, long > {};
+
+/**
+ * @brief Specialisation for long long to vector based unsigned char Stencil container.
+ */
+template <>
+class ECL_PUBLIC Converter< Stencil< std::vector<unsigned char> >, long long > : public converters::IntegralToByteArray< Stencil< std::vector<unsigned char> >, long long > {};
+
+/**
+ * @brief Specialisation for const unsigned char* Stencil container based FromByteArray converter.
+ */
+template <typename Integral>
+class ECL_PUBLIC Converter <Integral, Stencil< const unsigned char* > > : public converters::FromByteArray< Integral, Stencil< const unsigned char* > > {};
+
+
 } // namespace ecl
 
 #endif /* ECL_CONTAINERS_STENCIL_CONVERTERS_HPP_ */

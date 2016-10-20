@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ecl_mobile_robot</name>
-  <version>0.50.3</version>
+  <version>0.60.2</version>
   <description>
     Contains transforms (e.g. differential drive inverse kinematics)
     for the various types of mobile robot platforms.
@@ -14,13 +14,15 @@
   <author email="d.stonier@gmail.com">Daniel Stonier</author> -->
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ecl_build</build_depend>
   <build_depend>ecl_license</build_depend>
   <build_depend>ecl_errors</build_depend>
   <build_depend>ecl_geometry</build_depend>
   <build_depend>ecl_math</build_depend>
   <build_depend>ecl_formatters</build_depend>
   <build_depend>ecl_linear_algebra</build_depend>
-  
+
+  <run_depend>ecl_build</run_depend>
   <run_depend>ecl_license</run_depend>
   <run_depend>ecl_errors</run_depend>
   <run_depend>ecl_geometry</run_depend>

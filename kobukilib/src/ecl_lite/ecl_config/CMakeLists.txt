@@ -19,8 +19,6 @@ catkin_package(
 # ECL Configuration
 ##############################################################################
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ecl_build_DIR}/modules)
-include(ecl_platform_detection)
 ecl_detect_platform()
 include_directories(${CATKIN_DEVEL_PREFIX}/include)
 

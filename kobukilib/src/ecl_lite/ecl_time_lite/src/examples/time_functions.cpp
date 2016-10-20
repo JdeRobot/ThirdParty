@@ -16,6 +16,7 @@
 #include <string>
 #include <cstdlib>
 #include <ecl/time_lite/config.hpp>
+#include "../../include/ecl/time_lite/date.hpp"
 #include "../../include/ecl/time_lite/functions.hpp"
 #include "../../include/ecl/time_lite/cpu_time.hpp"
 
@@ -88,6 +89,14 @@ int main() {
     std::cout << "  sec : " << timestamp.tv_sec << std::endl;
     std::cout << "  nsec: " << timestamp.tv_nsec << std::endl;
 #endif
+
+    std::cout << std::endl;
+    std::cout << "***********************************************************" << std::endl;
+    std::cout << "                      Date String" << std::endl;
+    std::cout << "***********************************************************" << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Date String: " << ecl::get_date_string() << std::endl;
 
     std::cout << std::endl;
     std::cout << "***********************************************************" << std::endl;

@@ -4,13 +4,14 @@
  * @brief Packet handling implementation.
  *
  * License: BSD
- *   https://raw.github.com/yujinrobot/kobuki/master/kobuki_driver/LICENSE
+ *   https://raw.github.com/yujinrobot/kobuki_core/hydro-devel/kobuki_driver/LICENSE
  **/
 
 /*****************************************************************************
 ** Includes
 *****************************************************************************/
 
+#include <sstream>
 #include "../../include/kobuki_driver/packet_handler/packet_finder.hpp"
 
 /*****************************************************************************
@@ -109,6 +110,15 @@ unsigned int PacketFinderBase::numberOfDataToRead()
 void PacketFinderBase::getBuffer(BufferType & bufferRef)
 {
   bufferRef = buffer;
+}
+
+void PacketFinderBase::getPayload(BufferType & bufferRef)
+{
+  bufferRef.clear();
+  bufferRef.resize( buffer.size() - size_stx - size_etx - size_length_field - size_checksum_field );
+  for (unsigned int i = size_stx + size_length_field; i < buffer.size() - size_etx - size_checksum_field; i++) {
+    bufferRef.push_back(buffer[i]);
+  }
 }
 
 /**

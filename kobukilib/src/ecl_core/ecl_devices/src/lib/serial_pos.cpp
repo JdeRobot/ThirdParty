@@ -17,6 +17,7 @@
  ** Includes
  *****************************************************************************/
 
+#include <errno.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <termios.h>
@@ -26,6 +27,24 @@
 #include <ecl/exceptions/macros.hpp>
 #include "../../include/ecl/devices/serial_pos.hpp"
 #include "../../include/ecl/devices/detail/error_handler.hpp"
+
+/*****************************************************************************
+ ** Platform Checks
+ *****************************************************************************/
+
+#include <ecl/config.hpp>
+// B921600 baud rate macro is not part of the posix specification (see
+// http://digilander.libero.it/robang/rubrica/serial.htm#3_1_1). However
+// FreeBSD has had it for at least four years and linux quite some time too.
+// Apple Macs however do not currently have it, so we help it here.
+#if defined(ECL_IS_APPLE)
+  #ifndef B460800
+    #define B460800 460800
+  #endif
+  #ifndef B921600
+    #define B921600 921600
+  #endif
+#endif
 
 /*****************************************************************************
  ** Namespaces
@@ -102,7 +121,14 @@ bool Serial::open(const std::string& port_name, const BaudRate &baud_rate, const
   }
 
   static const int baud_rate_flags[] = {B110, B300, B600, B1200, B2400, B4800, B9600, B19200, B38400, B57600, B115200,
-                                        B921600};
+                                        B230400, B460800, B921600};
+  if (baud_rate >= (sizeof(baud_rate_flags) / sizeof(B110)))
+  {
+    ecl_throw(StandardException(LOC,ConfigurationError,"Selected baudrate is not supported."));
+    error_handler = InvalidArgError;
+    is_open = false;
+    return false;
+  }
   static const int data_bits_flags[] = {CS5, CS6, CS7, CS8};
 
   /*********************
@@ -127,7 +153,7 @@ bool Serial::open(const std::string& port_name, const BaudRate &baud_rate, const
   if (fcntl(file_descriptor, F_SETLK, &file_lock) != 0)
   {
     ecl_throw_decl(
-        StandardException(LOC,OpenError,std::string("Device is already locked. Try 'lsof | grep ") + port + std::string("' to find other processes that currently have the port open (if the device is a symbolic link you may need to replace the device name with the device that it is pointing to).")));
+        StandardException(LOC,OpenError,std::string("Device is already locked. Try 'lsof | grep ") + port + std::string("' to find other processes that currently have the port open (if the device is a symbolic link you may need to replace the device name with the device that it is pointing to) [posix error in case it is something else: " + std::to_string(errno))));
     error_handler = IsLockedError;
     is_open = false;
     return false;
@@ -144,7 +170,13 @@ bool Serial::open(const std::string& port_name, const BaudRate &baud_rate, const
   /*********************
    ** Baud rates
    **********************/
-  cfsetispeed(&options, baud_rate_flags[baud_rate]);
+  if (cfsetspeed(&options, baud_rate_flags[baud_rate]) < 0)
+  {
+    ecl_throw(StandardException(LOC,ConfigurationError,"Setting speed failed."));
+    error_handler = InvalidArgError;
+    is_open = false;
+    return false;
+  }
 
   /*********************
    ** Ownership

@@ -18,7 +18,7 @@
 
 #include <ecl/config/macros.hpp>
 #include <ecl/linear_algebra.hpp>
-#include <ecl/geometry/pose2d.hpp>
+#include <ecl/geometry/legacy_pose2d.hpp>
 #include "../macros.hpp"
 
 /*****************************************************************************
@@ -26,6 +26,7 @@
 *****************************************************************************/
 
 namespace ecl {
+
 namespace mobile_robot {
 
 /*****************************************************************************
@@ -83,7 +84,7 @@ public:
 	 * pose estimate.
 	 *
 	 * @code
-	 * Pose2D pose;
+	 * LegacyPose2D pose;
 	 * // ...
 	 * pose *= forwardDifferential(0.1,0.2);
 	 * @endcode
@@ -92,7 +93,7 @@ public:
 	 * @param dright : incoming right wheel angle change.
 	 * @return Pose : pose update (differential).
 	 */
-	ecl::Pose2D<double> forward(const double &dleft, const double &dright) const;
+	ecl::LegacyPose2D<double> forward(const double &dleft, const double &dright) const;
 
 	/**
 	 * @brief Generates a relative (to the robot's frame) pose differential
@@ -100,7 +101,7 @@ public:
 	 * know radius informaiton
 	 *
 	 * @code
-	 * Pose2D pose;
+	 * LegacyPose2D pose;
 	 * // ...
 	 * double linearVelocity = ....;
 	 * double angularVelocity = ..../
@@ -110,7 +111,7 @@ public:
 	 * @param angularVelocity : incoming angular velocity of platform
 	 * @return Pose : pose update (differential)
 	 */
-	ecl::Pose2D<double> forwardWithPlatformVelocity(const double & linearVelocity, const double & angularVelocity ) const;
+	ecl::LegacyPose2D<double> forwardWithPlatformVelocity(const double & linearVelocity, const double & angularVelocity ) const;
 
 	/**
 	 * @brief Generates wheel angle rates from scalar linear/angular velocity commands.
@@ -180,7 +181,7 @@ public:
 	 * @param b : final pose
 	 * @return Vector2d : the differential [ds, dw].
 	 */
-	static ecl::linear_algebra::Vector2d PartialInverse(const ecl::Pose2D<double> &a, const ecl::Pose2D<double> &b);
+	static ecl::linear_algebra::Vector2d PartialInverse(const ecl::LegacyPose2D<double> &a, const ecl::LegacyPose2D<double> &b);
 private:
 	double bias, radius;
 };

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ecl_time_lite</name>
-  <version>0.50.5</version>
+  <version>0.61.6</version>
   <description>
      Provides a portable set of time functions that are especially useful for 
      porting other code or being wrapped by higher level c++ classes.

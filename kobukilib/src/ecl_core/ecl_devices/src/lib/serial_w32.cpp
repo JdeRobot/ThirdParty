@@ -216,20 +216,23 @@ void Serial::open(const std::string& port_name, const BaudRate &baud_rate, const
 }
 
 void Serial::close() {
-	// release thread for receiving event
-	is_run = false;
-	event_receiver.join();
-	event_receiver.cancel();
+	if ( open() ) {
 
-	if (file_descriptor != INVALID_HANDLE_VALUE) {
-		// These return values, but assume it works ok, not really critical.
-		SetCommMask(file_descriptor, 0);
-		PurgeComm(file_descriptor, PURGE_TXABORT | PURGE_TXCLEAR | PURGE_RXABORT | PURGE_RXCLEAR );
-		CloseHandle(file_descriptor);
-		file_descriptor = INVALID_HANDLE_VALUE;
+		// release thread for receiving event
+		is_run = false;
+		event_receiver.join();
+		event_receiver.cancel();
+
+		if (file_descriptor != INVALID_HANDLE_VALUE) {
+			// These return values, but assume it works ok, not really critical.
+			SetCommMask(file_descriptor, 0);
+			PurgeComm(file_descriptor, PURGE_TXABORT | PURGE_TXCLEAR | PURGE_RXABORT | PURGE_RXCLEAR );
+			CloseHandle(file_descriptor);
+			file_descriptor = INVALID_HANDLE_VALUE;
+		}
+
+	    is_open = false;
 	}
-
-    is_open = false;
 }
 
 /*****************************************************************************
@@ -247,6 +250,7 @@ void event_proc(void* arg) {
 			}
 		}
 	}
+	owner->file_descriptor = INVALID_HANDLE_VALUE;
 	owner->is_open = false;
 }
 

@@ -24,7 +24,7 @@
 
 #if defined(ECL_HAS_WIN_TIMERS)
   #include "types_win.hpp"
-#elif defined(ECL_HAS_MAC_TIMERS) || defined(ECL_HAS_POSIX_TIMERS) || defined(ECL_HAS_RT_TIMERS) // should probably get cmake to check for timespec.
+#elif defined(ECL_HAS_MACH_TIMERS) || defined(ECL_HAS_POSIX_TIMERS) || defined(ECL_HAS_RT_TIMERS) // should probably get cmake to check for timespec.
   #include "types_pos.hpp"
 #else
   #error("There is not a supporting time implementation on this platform (possibly needs extended ecl support).")

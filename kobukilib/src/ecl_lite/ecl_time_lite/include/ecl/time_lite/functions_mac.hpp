@@ -21,7 +21,7 @@
 #include <ecl/time_lite/config.hpp>
 #include "macros.hpp"
 
-#if defined(ECL_HAS_MAC_TIMERS)
+#if defined(ECL_HAS_MACH_TIMERS)
 
 /*****************************************************************************
 ** Includes

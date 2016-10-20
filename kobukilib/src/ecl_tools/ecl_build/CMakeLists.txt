@@ -9,14 +9,18 @@ project(ecl_build)
 # Catkin
 ##############################################################################
 
-find_package(catkin)
+find_package(catkin REQUIRED)
+
+set(${PROJECT_NAME}_MODULES "")
+list(APPEND ${PROJECT_NAME}_MODULES ecl_platform_detection.cmake)
+list(APPEND ${PROJECT_NAME}_MODULES ecl_package.cmake)
+list(APPEND ${PROJECT_NAME}_MODULES ecl_find_sse.cmake)
+list(APPEND ${PROJECT_NAME}_MODULES ecl_build_utilities.cmake)
+list(APPEND ${PROJECT_NAME}_MODULES ecl_cx11.cmake)
+list(APPEND ${PROJECT_NAME}_MODULES cotire.cmake)
 
 catkin_package(
-# Play around with this later.
-#    CFG_EXTRAS modules/platform_detection.cmake, 
-#               modules/ecl_package.cmake, 
-#               modules/ecl_build_utilities.cmake, 
-#               templates/uninstall.cmake
+    CFG_EXTRAS ${${PROJECT_NAME}_MODULES}
 )
 
 
@@ -24,6 +28,8 @@ catkin_package(
 # Work
 ##############################################################################
 
-add_subdirectory(cmake)
+install(DIRECTORY cmake
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 

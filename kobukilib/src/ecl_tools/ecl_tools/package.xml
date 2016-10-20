@@ -1,6 +1,6 @@
 <package>
   <name>ecl_tools</name>
-  <version>0.60.0</version>
+  <version>0.61.5</version>
   <description>
     Tools and utilities for ecl development.
   </description>

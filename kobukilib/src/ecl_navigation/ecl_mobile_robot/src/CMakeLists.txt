@@ -3,5 +3,7 @@
 ###############################################################################
 
 add_subdirectory(lib)
-add_subdirectory(test)
-add_subdirectory(examples)
+if(CATKIN_ENABLE_TESTING)
+#  add_subdirectory(test)
+endif()
+#add_subdirectory(examples)

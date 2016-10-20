@@ -63,6 +63,7 @@ public:
 	 * @param flag : the type of error that is to be returned.
 	 */
 	Error(const ErrorFlag& flag = UnknownError) : error_flag(flag) {}
+	virtual ~Error() {}
 
 	/**
 	 * @brief The flag identifying the error identified with this error handler.
@@ -78,7 +79,7 @@ public:
 //	}
 
 	/**
-	 * @brief Print a location dependant message to standard out.
+	 * @brief Print a location dependent message to standard out.
 	 *
 	 * Usage:
 	 *

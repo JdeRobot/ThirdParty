@@ -1,6 +1,6 @@
 <package>
   <name>ecl_manipulation</name>
-  <version>0.50.2</version>
+  <version>0.60.2</version>
   <description>
     Includes basic manipulation related structures as well as a few 
     algorithms currently used at Yujin Robot.

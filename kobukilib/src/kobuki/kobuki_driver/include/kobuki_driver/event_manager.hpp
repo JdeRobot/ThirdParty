@@ -4,7 +4,7 @@
  * @brief The event manager - sigslot interface.
  *
  * License: BSD
- *   https://raw.github.com/yujinrobot/kobuki/master/kobuki_driver/LICENSE
+ *   https://raw.github.com/yujinrobot/kobuki_core/hydro-devel/kobuki_driver/LICENSE
  **/
 /*****************************************************************************
 ** Ifdefs
@@ -22,6 +22,7 @@
 #include <ecl/sigslots.hpp>
 
 #include "packets/core_sensors.hpp"
+#include "macros.hpp"
 
 /*****************************************************************************
 ** Namespaces
@@ -108,7 +109,7 @@ struct RobotEvent {
 ** Interfaces
 *****************************************************************************/
 
-class EventManager {
+class kobuki_PUBLIC EventManager {
 public:
   EventManager() {
     last_state.buttons    = 0;

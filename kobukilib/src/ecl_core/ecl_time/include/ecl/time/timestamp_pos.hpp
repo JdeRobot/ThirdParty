@@ -108,7 +108,7 @@ public:
 	 * Initialises the timestamp with the specified double value. Note that this is
 	 * slower than the manual initialisation with a sec/nsec pair.
 	 *
-	 * @param decimal_time_value : time units in seconds (integral part) and nanoseconds (decimal part).
+	 * @param decimal_time_value : time in decimal format (secs).
 	 *
 	 * @exception StandardException : thrown from TimeStampBase if the input arguments is not positive [debug mode only].
 	 */
@@ -148,7 +148,20 @@ public:
 	 * @exception StandardException : throws if clock lookup fails [debug mode only].
 	 */
 	const TimeStamp& stamp() ecl_debug_throw_decl(StandardException);
+#if defined(ECL_HAS_RT_TIMERS)
+	/**
+	 * @brief Force use of the realtime clock (even if monotonic is available).
+	 *
+	 * This is not the preferred stamp and isn't intended to be a cross-platform
+	 * option. Quite often 3rd party libraries (e.g. ros) do use this clock though,
+	 * so to be compatible we provide the option here.
+	 */
+        static const TimeStamp& realtime_now() ecl_debug_throw_decl(StandardException);
+#endif
 };
+
+
+
 }; // namespace ecl
 
 #ifdef ECL_HAS_EXCEPTIONS

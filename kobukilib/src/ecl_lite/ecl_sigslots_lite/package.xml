@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ecl_sigslots_lite</name>
-  <version>0.50.5</version>
+  <version>0.61.6</version>
   <description>
      This avoids use of dynamic storage (malloc/new) and thread safety (mutexes) to
      provide a very simple sigslots implementation that can be used for *very*

@@ -20,6 +20,7 @@
 #include "time_lite/macros.hpp"
 #include "time_lite/errors.hpp"
 #include "time_lite/types.hpp"
+#include "time_lite/date.hpp"
 #include "time_lite/functions.hpp"
 #include "time_lite/cpu_time.hpp"
 

@@ -1,6 +1,6 @@
 <package>
   <name>ecl_navigation</name>
-  <version>0.50.3</version>
+  <version>0.60.2</version>
   <description>
     This stack aims to bring the common tools and algorithms needed to
     develop navigation algorithms, in particular slam. It does not focus on

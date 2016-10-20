@@ -2,7 +2,8 @@
 # SUBDIRECTORIES
 ###############################################################################
 
-add_subdirectory(unsupported)
+add_subdirectory(eigen)
+add_subdirectory(sophus)
 
 ###############################################################################
 # FILES

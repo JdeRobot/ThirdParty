@@ -58,6 +58,16 @@ const TimeStamp& TimeStamp::stamp() ecl_debug_throw_decl(StandardException) {
 	}
     return (*this);
 }
+
+#if defined(ECL_HAS_RT_TIMERS)
+const TimeStamp& TimeStamp::realtime_now() ecl_debug_throw_decl(StandardException) {
+        TimeStructure time;
+        if ( realtime_epoch_time(time).flag() != NoError ) {
+                ecl_debug_throw(time::throwTimeStampException(LOC));
+        }
+        return TimeStamp(time.tv_sec, time.tv_nsec);
+}
+#endif
 }; // namespace ecl
 
 /*****************************************************************************

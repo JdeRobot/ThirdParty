@@ -16,7 +16,7 @@
 ** Macros
 *****************************************************************************/
 
-#if defined(ECL_HAS_MAC_TIMERS)
+#if defined(ECL_HAS_MACH_TIMERS)
 
 /*****************************************************************************
 ** Namespaces
@@ -44,7 +44,7 @@ TimeError sleep_until(const TimeStructure &time) {
 	TimeStructure current_time, sleep_time;
 
 	TimeError error = epoch_time(current_time);
-	if ( error.flag() != NoError ) { return result; }
+	if ( error.flag() != NoError ) { return error; }
 
 	/*********************
 	** current > time?

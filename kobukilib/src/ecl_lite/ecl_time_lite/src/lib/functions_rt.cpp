@@ -42,6 +42,17 @@ TimeError epoch_time(TimeStructure &time) {
 	}
 }
 
+TimeError realtime_epoch_time(TimeStructure &time) {
+        int result = clock_gettime(CLOCK_REALTIME,&time);
+        switch (result) {
+                case(0) : { return TimeError(NoError); }
+                case(EFAULT) : { return TimeError(MemoryError); }          // time was not in addressable memory space
+                case(EINVAL) : { return TimeError(ArgNotSupportedError); } // clock id is not supported (actually impossible if cmake detects)
+                case(EPERM) : { return TimeError(PermissionsError); }      // user does not have permissions to use the clock.
+                default : { return TimeError(UnknownError); }
+        }
+}
+
 TimeError sleep_until(const TimeStructure &time) {
     // Last arg is to catch remaining time if interrupted by a signal, not necessary here.
 #ifdef ECL_HAS_CLOCK_MONOTONIC

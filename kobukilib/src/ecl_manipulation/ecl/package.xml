@@ -1,6 +1,6 @@
 <package>
   <name>ecl</name>
-  <version>0.50.2</version>
+  <version>0.60.2</version>
   <description>
     Metapackage bringing all of ecl together.
   </description>

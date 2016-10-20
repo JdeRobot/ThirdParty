@@ -125,7 +125,12 @@ SocketError socketpair(socket_descriptor socket_fd_pair[2], const bool non_block
 	// returns 0 on success, -1 and errno otherwise
 	int result = 0;
 	if ( non_blocking ) {
+#if defined(SOCK_NONBLOCK)
 		result = ::socketpair(AF_LOCAL, SOCK_STREAM|SOCK_NONBLOCK, 0, socket_fd_pair);
+#else
+		result = ::socketpair(AF_LOCAL, SOCK_STREAM, 0, socket_fd_pair);
+                // TODO: SOCK_NONBLOCK is n/a at least on macosx -> figure out how to make it non-blocking
+#endif
 	} else {
 		::socketpair(AF_LOCAL, SOCK_STREAM, 0, socket_fd_pair);
 	}

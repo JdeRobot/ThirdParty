@@ -18,7 +18,7 @@
 
 #include <ecl/time_lite/config.hpp>
 
-#if defined(ECL_HAS_MAC_TIMERS) || defined(ECL_HAS_POSIX_TIMERS) || defined(ECL_HAS_RT_TIMERS)
+#if defined(ECL_HAS_MACH_TIMERS) || defined(ECL_HAS_POSIX_TIMERS) || defined(ECL_HAS_RT_TIMERS)
 
 /*****************************************************************************
 ** Includes

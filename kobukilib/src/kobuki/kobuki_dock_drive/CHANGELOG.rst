@@ -1,6 +1,15 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package kobuki_dock_drive
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=========
+Changelog
+=========
+
+0.6.2 (2016-01-09)
+------------------
+* enable the cx11 compiler
+
+0.6.0 (2014-08-04)
+------------------
+* Redevelopment of kobuki dock drive algorithm.
+* Contributors: Jihoon Lee
 
 0.5.3 (2013-09-06)
 ------------------

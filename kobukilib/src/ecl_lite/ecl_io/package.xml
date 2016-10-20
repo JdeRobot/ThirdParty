@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ecl_io</name>
-  <version>0.50.5</version>
+  <version>0.61.6</version>
   <description>
      Most implementations (windows, posix, ...) have slightly different api for 
      low level input-output functions. These are gathered here and re-represented 

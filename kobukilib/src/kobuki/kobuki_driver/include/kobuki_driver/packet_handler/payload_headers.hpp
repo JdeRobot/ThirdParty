@@ -7,7 +7,7 @@
  * is id'd by one of the values here.
  *
  * License: BSD
- *   https://raw.github.com/yujinrobot/kobuki/master/kobuki_driver/LICENSE
+ *   https://raw.github.com/yujinrobot/kobuki_core/hydro-devel/kobuki_driver/LICENSE
  **/
 /*****************************************************************************
 ** Ifdefs
@@ -35,7 +35,7 @@ public:
   // Service Payloads
   Hardware = 10, Firmware = 11, ThreeAxisGyro = 13, Eeprom = 15, GpInput = 16,
 
-  UniqueDeviceID = 19, Reserved = 20
+  UniqueDeviceID = 19, Reserved = 20, ControllerInfo = 21
   };
 };
 

@@ -10,6 +10,7 @@ project(ecl_core_apps)
 ##############################################################################
 
 find_package(catkin REQUIRED COMPONENTS 
+    ecl_build
     ecl_config 
     ecl_linear_algebra
     ecl_command_line
@@ -23,15 +24,21 @@ find_package(catkin REQUIRED COMPONENTS
     ecl_ipc
     ecl_sigslots
     ecl_streams
+    ecl_threads
     ecl_type_traits
     ecl_time_lite
     )
 catkin_package()
 
+##############################################################################
+# Project Configuration
+##############################################################################
+
 include_directories(include ${catkin_INCLUDE_DIRS})
+ecl_enable_cxx11_compiler()
 
 ##############################################################################
-# Actual project configuration
+# Sources
 ##############################################################################
 
 add_subdirectory(src)

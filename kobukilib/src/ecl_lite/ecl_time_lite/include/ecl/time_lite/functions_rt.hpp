@@ -55,6 +55,24 @@ namespace ecl {
 ecl_time_lite_PUBLIC  TimeError epoch_time(TimeStructure &time);
 
 /**
+ * @brief Realtime gettime function provided by librt.
+ *
+ * For those rare cases when you absolutely have to fallback to realtime
+ * instead of using the monotone clock.
+ *
+ * Valid return values:
+ *
+ * - NoError,
+ * - MemoryError,
+ * - ArgNotSupported,
+ * - PermissionsError.
+ *
+ * @param time : time structure.
+ * @return TimeError : error result.
+ */
+ecl_time_lite_PUBLIC  TimeError realtime_epoch_time(TimeStructure &time);
+
+/**
  * @brief Monotonic absolute timed sleep function provided by librt.
  *
  * This is the best implementation of a sleeper which does not
