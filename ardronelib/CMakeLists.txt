@@ -32,6 +32,7 @@ ExternalProject_Add(ardronelib
         BUILD_COMMAND make NO_EXAMPLES=yes QUIET_BUILD=yes
         INSTALL_COMMAND make install INSTALL_PREFIX=${ARDRONE_SDK_LIB_PATH}
         BUILD_IN_SOURCE 1
+	UPDATE_DISCONNECTED 1
 )
 
 
