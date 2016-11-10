@@ -7,6 +7,10 @@ It will install *ARDroneSDK 2.0.1* dependency for *ardrone_server*
 
 Install
 -------
+* Install dependencies:
+
+   `sudo apt-get install libsdl1.2-dev`
+
 * Create a build directory and move into it:
 
   `mkdir ardronelib-build && cd ardronelib-build`
