@@ -18,7 +18,7 @@ In order to compile this libraries from source, you should:
 
   3. Install dependencies:
   
-    ```sudo apt-get install python-wstool python-catkin-pkg python-empy python-nose python-setuptools build-essential libeigen3-dev```
+    ```sudo apt-get install python3-wstool python3-catkin-pkg python3-empy python3-nose python3-setuptools build-essential libeigen3-dev sophus```
     
   4. Download this repository
   
