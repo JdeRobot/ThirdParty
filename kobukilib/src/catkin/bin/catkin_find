@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import print_function
 import argparse
@@ -7,7 +7,7 @@ import os
 
 # find the import relatively if available to work before installing catkin or overlaying installed version
 if os.path.exists(os.path.join(os.path.dirname(__file__), 'CMakeLists.txt')):
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'python3'))
 from catkin.find_in_workspaces import find_in_workspaces
 
 

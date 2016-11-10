@@ -1,6 +1,7 @@
 # generated from catkin/cmake/em/order_packages.cmake.em
 @{
 import os
+
 try:
     from catkin_pkg.topological_order import topological_order
 except ImportError as e:

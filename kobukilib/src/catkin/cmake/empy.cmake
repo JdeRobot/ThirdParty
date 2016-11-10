@@ -8,6 +8,7 @@ function(find_python_module module)
     # A module's location is usually a directory, but for
     # binary modules
     # it's a .so file.
+    message("Module: ${module}" )
     execute_process(COMMAND "${PYTHON_EXECUTABLE}" "-c" "import re, ${module}; print re.compile('/__init__.py.*').sub('',${module}.__file__)"
       RESULT_VARIABLE _${module}_status 
       OUTPUT_VARIABLE _${module}_location
@@ -20,12 +21,13 @@ function(find_python_module module)
   find_package_handle_standard_args(PY_${module} DEFAULT_MSG PY_${module_upper})
 endfunction(find_python_module)
 
-find_program(EMPY_EXECUTABLE empy)
+find_program(EMPY_EXECUTABLE empy3)
+message("EMPY_EXECUTABLE: " ${EMPY_EXECUTABLE})
 if(NOT EMPY_EXECUTABLE)
   # On OSX, there's an em.py, but not executable empy
   find_python_module(em)
   if(NOT PY_EM)
-    message(FATAL_ERROR "Unable to find either executable 'empy' or Python module 'em'... try installing package 'python-empy'")
+    message(FATAL_ERROR "Unable to find either executable 'empy' or Python module 'em'... try installing package 'python3-empy'")
   else()
     set(EMPY_EXECUTABLE "${PYTHON_EXECUTABLE};${PY_EM}" CACHE STRING "Executable string for empy" FORCE)
   endif()
