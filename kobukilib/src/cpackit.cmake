@@ -15,7 +15,7 @@ SET (CPACK_PACKAGE_VERSION_PATCH 0)
 SET (CPACK_DEBIAN_PACKAGE_PRIORITY "extra")
 SET (CPACK_DEBIAN_PACKAGE_SECTION "devel")
 
-SET(CPACK_DEBIAN_PACKAGE_DEPENDS "python-wstool, python-catkin-pkg, python-empy, python-nose, python-setuptools, build-essential, libeigen3-dev")
+SET(CPACK_DEBIAN_PACKAGE_DEPENDS "python3-wstool, python3-catkin-pkg, python3-empy, python3-nose, python3-setuptools, build-essential, libeigen3-dev sophus")
 
 SET (CPACK_PACKAGE_DESCRIPTION
 "kobukilib is a set of libraries needed to compile jderobot kobuki_driver.")
