@@ -54,8 +54,11 @@ RESOURCES += \
 
 headers.files = src/*.h
 headers.path = /usr/include
-python.files = python3.5/qfi/*
+python.files = python/qfi/*
 python.path = /usr/lib/python3/dist-packages/qfi
+
+python2.files = python/qfi/*
+python2.path = /usr/lib/python2.7/dist-packages/qfi
 
 INSTALLS += headers
 unix:!symbian {
@@ -68,3 +71,4 @@ unix:!symbian {
 }
 
 INSTALLS += python
+INSTALLS += python2

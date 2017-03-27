@@ -10,23 +10,34 @@ In order to compile this libraries from source, you should:
   
     ```sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'```
     
-    ```sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 0xB01FA116```
+    ```sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116```
+    
+  2. Add JdeRobot sources and key
   
-  2. Update the package index:
+      ```sudo sh -c 'cat<<EOF>/etc/apt/sources.list.d/jderobot.list
+# for ubuntu 16.04 LTS (64 bit)
+
+deb http://jderobot.org/apt xenial main
+deb-src http://jderobot.org/apt xenial main
+EOF'```
+    
+    ```sudo apt-key adv --keyserver keyserver.ubuntu.com --recv B0E7F58E82C8091DF945A0453DA08892EE69A25C```
+  
+  3. Update the package index:
 
     ```sudo apt-get update```
 
-  3. Install dependencies:
+  4. Install dependencies:
   
-    ```sudo apt-get install python3-wstool python3-catkin-pkg python3-empy python3-nose python3-setuptools build-essential libeigen3-dev sophus```
+    ```sudo apt-get install python-wstool python-catkin-pkg python-empy python-nose python-setuptools build-essential libeigen3-dev sophus```
     
-  4. Download this repository
+  5. Download this repository
   
     ```git clone https://github.com/RoboticsURJC/JdeRobot-ThirdParty.git ```
     
     ```cd kobukilib/build```
     
-  5. Compile and install
+  6. Compile and install
   
     ```cmake .. && make && sudo make install```
 
