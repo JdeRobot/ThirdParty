@@ -10,6 +10,6 @@ Homepage: <insert the upstream URL, if relevant>
 
 Package: qfi
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3-pyqt5.qtsvg, python3-pyqt5
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-pyqt5.qtsvg, python3-pyqt5, python-pyqt5.qtsvg, python-pyqt5
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

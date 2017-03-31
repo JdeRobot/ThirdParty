@@ -15,9 +15,7 @@ macro(em_expand context_in context_out em_file_in file_out)
 
   debug_message(2 "Evaluate template '${em_file_in}' to '${file_out}' (with context from '${context_out}')")
   assert(EMPY_EXECUTABLE)
-
-
-  set(command ${PYTHON_EXECUTABLE} ${EMPY_EXECUTABLE})
+  set(command ${EMPY_EXECUTABLE})
   # prepend environment if set
   if(CATKIN_ENV)
     set(command ${CATKIN_ENV} ${command})

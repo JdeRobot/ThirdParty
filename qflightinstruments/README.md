@@ -11,6 +11,8 @@ You may need qt4 or qt5 qmake version in order to compile the library.
 
     sudo apt-get install qt5-qmake qt5-default
     
+
+
 # Build it!
 
 Using qmake build as usual
@@ -24,9 +26,22 @@ The building proccess will generate a debian package, so you can deploy wherever
 
     /usr/lib for the generated .so in C++
     /usr/include for headers in C++
-    /usr/lib/python3/dist-packages/qfi for Python modules
+    /usr/lib/python3/dist-packages/qfi for Python 3 modules
+    /usr/lib/python2.7/dist-packages/qfi for Python 2.7 modules
     
 Enjoy it!
+
+
+
+
+# Make Package
+
+Install necesaries packages
+
+    sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diffutils patch gnupg fakeroot lintian pbuilder cdbs
+    
+make package
+    debuild -uc -us
 
 
 Author: Marek Cel <marekcel@marekcel.pl>
