@@ -1,15 +1,18 @@
 Source: qfi
-Section: unknown
+Section: libs
 Priority: optional
 Maintainer: Aitor Martinez <aitor.martinez.fernandez@gmail.com>
 Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.6
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://github.com/JdeRobot/ThirdParty/tree/master/qflightinstruments
 #Vcs-Git: git://anonscm.debian.org/collab-maint/qfi.git
 #Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/qfi.git
 
 Package: qfi
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3-pyqt5.qtsvg, python3-pyqt5, python-pyqt5.qtsvg, python-pyqt5
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: QFlightInstruments for C++ and Python3.5
+ This is collection of Qt4 and Qt5 widgets of flight instruments, inluding
+ Attitude Indicator, Airspeed Indicator, Vertical Speed Indicator,
+ Turn Indicator, Horizontal Situation Indicator, Primary Flight Display and
+ Navigation Display.
