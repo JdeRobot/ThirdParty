@@ -1,5 +1,6 @@
 
 project (youtubedl-jderobot)
+cmake_minimum_required(VERSION 2.8)
 
 
 ###################
@@ -8,7 +9,7 @@ project (youtubedl-jderobot)
 #                 #
 ###################
 
-install(FILES bin/youtube-dl DESTINATION usr/local/bin/ )
+install(FILES youtube-dl DESTINATION usr/local/bin/ )
 
 #
 # Deb packages
