@@ -1,0 +1,6 @@
+#!/bin/sh
+# Extract CMake macros during configure 
+
+chmod a+rx /usr/local/bin/youtube-dl
+
+ldconfig
