@@ -1,5 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+from __future__ import division
+
 
 from PyQt5.QtGui import QTransform
 from PyQt5.QtCore import pyqtSignal, QPointF, Qt
