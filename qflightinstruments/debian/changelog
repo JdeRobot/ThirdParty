@@ -1,3 +1,9 @@
+qfi (1.0-3) stable; urgency=medium
+
+  *  support for python2 (fixed)
+
+ -- Aitor Martinez <aitor.martinez.fernandez@gmail.com>  Thu, 18 Dec 2017 9:09:07 +0000
+
 qfi (1.0-2) stable; urgency=medium
 
   *  support for python2
