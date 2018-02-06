@@ -8,7 +8,7 @@ add_executable(freenect-wavrecord wavrecord.c)
 target_link_libraries(freenect-camtest freenect)
 target_link_libraries(freenect-wavrecord freenect)
 install(TARGETS freenect-camtest freenect-wavrecord
-        DESTINATION bin)
+        DESTINATION ${PROJECT_BIN_INSTALL_DIR})
 
 # All viewers need pthreads and GLUT.
 set(THREADS_USE_PTHREADS_WIN32 true)
@@ -32,7 +32,7 @@ if (Threads_FOUND AND OPENGL_FOUND AND GLUT_FOUND)
   target_link_libraries(freenect-micview freenect ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
 
   install(TARGETS freenect-glview freenect-regview freenect-hiview freenect-chunkview freenect-micview
-          DESTINATION bin)
+          DESTINATION ${PROJECT_BIN_INSTALL_DIR})
 endif ()
 
 # A few examples use c_sync.
@@ -48,12 +48,12 @@ if (BUILD_C_SYNC)
   target_link_libraries(freenect-tiltdemo freenect_sync ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
 
   install(TARGETS freenect-regtest freenect-tiltdemo
-          DESTINATION bin)
+          DESTINATION ${PROJECT_BIN_INSTALL_DIR})
 
   if (OPENGL_FOUND AND GLUT_FOUND)
     add_executable(freenect-glpclview glpclview.c)
     target_link_libraries(freenect-glpclview freenect_sync ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${MATH_LIB})
     install(TARGETS freenect-glpclview
-            DESTINATION bin)
+            DESTINATION ${PROJECT_BIN_INSTALL_DIR})
   endif ()
 endif ()

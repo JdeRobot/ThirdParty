@@ -16,13 +16,13 @@ install (TARGETS fakenect
 add_executable(fakenect-record record.c)
 target_link_libraries(fakenect-record freenect ${MATH_LIB})
 install (TARGETS fakenect-record
-  DESTINATION bin)
+  DESTINATION ${PROJECT_BIN_INSTALL_DIR})
 
 CONFIGURE_FILE("fakenect.sh.in"
   "fakenect.sh"
   IMMEDIATE @ONLY)
 install (PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/fakenect.sh
-  DESTINATION bin
+  DESTINATION ${PROJECT_BIN_INSTALL_DIR}
   RENAME fakenect)
 
 install(FILES fakenect.1 fakenect-record.1

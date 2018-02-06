@@ -23,4 +23,4 @@ include_directories(${PROJECT_SOURCE_DIR}/wrappers/cpp)
 target_link_libraries(FreenectDriver freenectstatic ${MATH_LIB})
 
 install (TARGETS FreenectDriver
-  DESTINATION "${PROJECT_LIBRARY_INSTALL_DIR}/OpenNI2-FreenectDriver")
+  DESTINATION "${PROJECT_LIBRARY_INSTALL_DIR}/OpenNI2/Drivers/")

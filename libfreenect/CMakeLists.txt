@@ -181,7 +181,7 @@ configure_file(
 
 # --- cmake config file ---
 CONFIGURE_FILE(libfreenectConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/libfreenectConfig.cmake @ONLY)
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfreenectConfig.cmake DESTINATION share/${PROJECT_NAME})
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfreenectConfig.cmake DESTINATION ${PROJECT_SHARE_INSTALL_DIR}/${PROJECT_NAME})
 
 add_custom_target(uninstall
   COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/UninstallTarget.cmake)
@@ -190,9 +190,9 @@ add_custom_target(uninstall
 # after make, use "fakeroot cpack" in the build Dir to complete
 
 IF ( BUILD_CPACK_TGZ OR BUILD_CPACK_DEB OR BUILD_CPACK_RPM )
-  set(CPACK_PACKAGE_DESCRIPTION "libfreenect for kinect")
-  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libfreenect library for using kinect")
-  set(CPACK_PACKAGE_NAME "libfreenect-dev")
+  set(CPACK_PACKAGE_DESCRIPTION "libfreenect for kinect with Openni2 Support")
+  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libfreenect library for using kinect with Openni2 Support")
+  set(CPACK_PACKAGE_NAME "jderbobot-libfreenect-dev")
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "libusb-1.0-0-dev")
 
   set(CPACK_PACKAGE_CONTACT "OpenKinect <openkinect@googlegroups.com>")
@@ -220,9 +220,9 @@ IF ( BUILD_CPACK_TGZ OR BUILD_CPACK_DEB OR BUILD_CPACK_RPM )
   INSTALL(FILES "include/libfreenect.h" DESTINATION ${PROJECT_INCLUDE_INSTALL_DIR})
   INSTALL(FILES "include/libfreenect_registration.h" DESTINATION ${PROJECT_INCLUDE_INSTALL_DIR})
   INSTALL(FILES "include/libfreenect_audio.h" DESTINATION ${PROJECT_INCLUDE_INSTALL_DIR})
-  INSTALL(FILES "APACHE20" DESTINATION "share/doc/${CPACK_PACKAGE_NAME}")
-  INSTALL(FILES "GPL2" DESTINATION "share/doc/${CPACK_PACKAGE_NAME}")
-  INSTALL(FILES "README.md" DESTINATION "share/doc/${CPACK_PACKAGE_NAME}")
+  INSTALL(FILES "APACHE20" DESTINATION "${PROJECT_SHARE_INSTALL_DIR}/doc/${CPACK_PACKAGE_NAME}")
+  INSTALL(FILES "GPL2" DESTINATION "${PROJECT_SHARE_INSTALL_DIR}/doc/${CPACK_PACKAGE_NAME}")
+  INSTALL(FILES "README.md" DESTINATION "${PROJECT_SHARE_INSTALL_DIR}/doc/${CPACK_PACKAGE_NAME}")
 
 ENDIF ( )
 

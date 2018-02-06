@@ -25,6 +25,12 @@ For the examples, you'll need
 - glut     (included with OSX)
 - [pthreads-win32](http://sourceforge.net/projects/pthreads4w/) (Windows)
 
+## Build jderobot package
+    mkdir build
+    cd build
+    cmake -DBUILD_OPENNI2_DRIVER=ON -DBUILD_CPACK_DEB=ON -DCMAKE_INSTALL_PREFIX=/opt/jderobot ..
+    make package
+
 ## <a name="fetch-build"></a>Fetch & Build
 
     git clone https://github.com/OpenKinect/libfreenect
