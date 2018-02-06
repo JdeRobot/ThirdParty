@@ -1,11 +1,11 @@
-openni2 (2.2.0-2jderobot) unstable; urgency=low
+jderobot-openni2 (2.2.0-2) unstable; urgency=low
 
   * Change udev rules file name  
 
  -- Roberto Calvo <rocapal@gsyc.urjc.es>  Fri, 10 Jan 2014 09:09:18 +0000
 
 
-openni2 (2.2.0-1jderobot) unstable; urgency=low
+jderobot-openni2 (2.2.0-1) unstable; urgency=low
 
   * Initial release
 

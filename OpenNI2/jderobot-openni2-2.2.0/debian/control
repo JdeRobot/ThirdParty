@@ -1,4 +1,4 @@
-Source: openni2
+Source: jderobot-openni2
 Section: net
 Priority: optional
 Maintainer: Roberto Calvo <rocapal@gsyc.urjc.es>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 Homepage: http://jderobot.org 
 
-Package: openni2
+Package: jderobot-openni2
 Architecture: amd64 
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: The OpenNI framework is an open source SDK for 3D development
