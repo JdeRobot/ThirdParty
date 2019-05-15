@@ -40,8 +40,7 @@ Install necesaries packages
 
     sudo apt-get install build-essential devscripts ubuntu-dev-tools debhelper dh-make diffutils patch gnupg fakeroot lintian pbuilder cdbs
     
-make package
-    debuild -uc -us
+debuild -uc -us
 
 
 Author: Marek Cel <marekcel@marekcel.pl>
