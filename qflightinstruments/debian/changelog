@@ -1,3 +1,9 @@
+qfi (1.0-5) stable; urgency=medium
+
+  *  Compiled for ubuntu bionic 18.04
+
+ -- Francisco Perez <f.perez475@gmail.com>  Wed, 15 May 2019 9:09:07 +0000
+
 qfi (1.0-3) stable; urgency=medium
 
   *  support for python2 (fixed)
