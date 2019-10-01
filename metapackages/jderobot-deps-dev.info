@@ -1,0 +1,11 @@
+Package: jderobot-deps-dev
+Version: 5.3.0-rc1
+Architecture: all
+Section: net
+Size: 0
+Installed-Size: 0
+Depends: libc6 (>= 2.2.5), libgazebo5-dev, libdc1394-22-dev, libpcl-all, ice35-slice, ice35-translators, libzeroc-ice35-dev, ice35-services, libcwiid-dev, libopencv-core-dev, libopencv-flann-dev, libopencv-imgproc-dev, libopencv-ml-dev, libopencv-features2d-dev, libopencv-video-dev, libopencv-objdetect-dev, libopencv-contrib-dev, libopencv-gpu-dev, libopencv-legacy-dev, libopencv-dev,freeglut3-dev, libglu1-mesa-dev, libopenni2-dev, libxml++2.6-dev, libtinyxml-dev, libgtk2.0-bin, libgtk2.0-cil, libgtk2.0-common, libgtk2.0-dev, libgtkgl2.0-dev, libgtkglext1-doc, libgtkglext1-dev, libgtkmm-2.4-dev, libglademm-2.4-dev, libgnomecanvas2-dev, libgnomecanvasmm-2.6-dev, libgtkglextmm-x11-1.2-dev, libgoocanvasmm-2.0-dev, libusb-1.0-0-dev, libogre-1.8-dev, python-opencv, python-zeroc-ice, python-qt4, python-qwt5-qt4, python-matplotlib, libqwt5-qt4-dev, git, cmake, make, gcc-4.6, g++-4.6, gcc, g++, pkg-config, libeigen3-dev, libgsl0ldbl, libgsl0-dev, libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev, libvtk5-dev
+Maintainer: Francisco Perez <f.perez475@gmail.com>
+Description: Metapackage that gathers all library headers required to compile JdeRobot framework.
+ Jderobot is a software development suite for robotics applications.
+ Get it from https://github.com/RoboticsURJC/JdeRobot
