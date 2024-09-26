@@ -1,0 +1,12 @@
+Package: jderobot-deps
+Version: 5.3.0-rc1
+Architecture: all
+Priority: extra
+Section: net
+Size: 0
+Installed-Size: 0
+Depends: freeglut3, libatkmm-1.6-1 (>= 2.22.1), libboost-filesystem1.54.0, libboost-system1.54.0, libboost-thread1.54.0, libc6 (>= 2.15), libgcc1 (>= 1:4.1.1), libgl1-mesa-glx | libgl1, libglademm-2.4-1c2a (>= 2.6.0), libglib2.0-0 (>= 2.12.0), libglibmm-2.4-1c2a (>= 2.36.2), libglu1-mesa | libglu1, libgnomecanvasmm-2.6-1c2a (>= 2.23.1), libgoocanvasmm-2.0-6 (>= 0.15), libgsl0ldbl (>= 1.9), libgtk2.0-0 (>= 2.8.0), libgtkglextmm-x11-1.2-0 (>= 1.2.0), libgtkmm-2.4-1c2a (>= 1:2.24.0), libgtkmm-3.0-1 (>= 3.8.1), libicestorm35, libiceutil35, libopencv-calib3d2.4, libopencv-core2.4, libopencv-features2d2.4, libopencv-highgui2.4, libopencv-imgproc2.4, libopencv-video2.4, libopenni0, libopenni2-0, libpcl-common-1.7, libpcl-filters-1.7, libpcl-io-1.7, libpcl-recognition-1.7, libpcl-segmentation-1.7, libpcl-visualization-1.7, libqt4-opengl (>= 4:4.5.3), libqtcore4 (>= 4:4.8.0), libqtgui4 (>= 4:4.5.3), libsigc++-2.0-0c2a (>= 2.0.2), libssl1.0.0 (>= 1.0.0), libstdc++6 (>= 4.6), libtinyxml2.6.2, libusb-1.0-0 (>= 2:1.0.8), libvtk5.8, libxml++2.6-2 (>= 2.36.0), libxml2 (>= 2.7.4), libzeroc-ice35, zlib1g (>= 1:1.2.0),  gazebo5, libdc1394-22, libpcl-visualization-1.7, libpcl-surface-1.7, libpcl-registration-1.7, libpcl-segmentation-1.7, libpcl-filters-1.7, libpcl-sample-consensus-1.7, libpcl-io-1.7, libpcl-octree-1.7, libpcl-features-1.7, libpcl-kdtree-1.7, libpcl-common-1.7, libxerces-c3.1, libzeroc-ice35, libiceutil35, libicestorm35, libopencv-core2.4, libopencv-flann2.4, libopencv-imgproc2.4, libopencv-ml2.4, libopencv-features2d2.4, libopencv-video2.4, libopencv-objdetect2.4, libopencv-contrib2.4, libopencv-gpu2.4, libopencv-legacy2.4,freeglut3, libglu1-mesa, libopenni2-0, libpthread-stubs0-dev, libxml++2.6-2, libxml2, libboost-system1.54.0, libboost-filesystem1.54.0, libtinyxml2.6.2, libgtk2.0-0, libgtkgl2.0-1, libgtkmm-2.4-1c2a, libgtkglext1, libglademm-2.4-1c2a, libgnomecanvas2-0, libgnomecanvasmm-2.6-1c2a, libgnomecanvasmm-2.6-1c2a, libgtkglextmm-x11-1.2-0, libgtkglext1, libqtcore4, libqt4-opengl, libgoocanvasmm-2.0-6,  libusb-1.0-0, libogre-1.8.0,  python-opencv, python-zeroc-ice,  python-qt4, python-qwt5-qt4, python-matplotlib, libqwt5-qt4, ardronelib, libvtk5.8
+Maintainer: Francisco Perez <f.perez475@gmail.com>
+Description: Metapackage that gathers all libraries required by JdeRobot framework.
+ Jderobot is a software development suite for robotics applications.
+
